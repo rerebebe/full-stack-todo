@@ -1,0 +1,346 @@
+.App {
+  font-family: Arial, Helvetica, sans-serif;
+  /* place-items: center; */
+  background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+  background-size: 400% 400%;
+  animation: gradient 15s ease infinite;
+  padding: 50px;
+  justify-content: center;
+}
+
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.AlertMessage {
+  width: 25rem;
+  margin: 20px 0px;
+  background-color: rgba(223, 149, 215, 0.918);
+  border-radius: 5px;
+  font-size: 20px;
+  padding: 20px 15px;
+  color: rgba(121, 22, 22, 0.888);
+}
+
+.loginSignUpTab {
+  display: flex;
+  justify-content: center;
+}
+
+.loginTab {
+  width: 450px;
+  height: 550px;
+  border-radius: 10px;
+  background-color: rgb(66, 96, 143);
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: left;
+  text-align: left;
+  padding: 15px;
+  margin: 20px 0px;
+  gap: 10px;
+  color: black;
+}
+.loginTab > form > label {
+  color: white;
+}
+.loginTab > form > input {
+  padding: 0px 10px;
+}
+.Title {
+  margin-bottom: 10px;
+  font-size: 40px;
+  font-weight: bolder;
+  color: white;
+  display: flex;
+  align-items: center;
+}
+
+.loginTabInput {
+  margin: 6px;
+  border-radius: 6px;
+  height: 40px;
+  width: 25rem;
+  font-size: medium;
+}
+.loginTabButton {
+  width: 25rem;
+  height: 50px;
+  margin: 20px 10px;
+  border: 2px solid #23a6d5;
+  background-color: white;
+  border-radius: 5px;
+  font-size: 20px;
+  cursor: pointer;
+  box-shadow: black;
+  background-color: #23a6d5;
+}
+.loginTabButton:hover {
+  box-shadow: 2px 1px 8px rgba(0, 0, 128, 0.582);
+}
+
+.Todo {
+  font-family: Arial, Helvetica, sans-serif;
+  max-width: 80em;
+  min-width: 10em;
+}
+
+.TodoEdit {
+  color: white;
+  display: grid;
+  text-align: left;
+  gap: 6px;
+}
+.TodoEdit > label {
+  font-size: medium;
+}
+.TodoEdit > input {
+  padding-left: 6px;
+  outline-style: none;
+  block-size: 40px;
+  border: 3px solid white;
+  border-radius: 3px;
+  font-size: large;
+  color: rgb(100, 100, 100);
+}
+.TodoEdit > input:focus {
+  outline: 4px solid rgba(96, 178, 186, 0.769);
+}
+
+.Buttondiv {
+  display: flex;
+  flex-direction: row-reverse;
+  margin: 10px;
+}
+.Button {
+  display: flex;
+  font-size: large;
+  box-shadow: 2px 2px 0px 0px #555;
+  padding: 13px 30px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #9c4c83be;
+  border: none;
+  color: white;
+  text-align: center;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  font-weight: 600;
+}
+.Button:hover {
+  background-color: transparent;
+  color: white;
+  border: 2px solid #aa7e44;
+}
+
+.Overlystyle {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.77);
+}
+
+.Modal {
+  z-index: 2;
+  border: 2px solid rgba(248, 161, 99, 0.603);
+  background-color: rgba(248, 161, 99, 0.603);
+  border-radius: 1em;
+  height: 500px;
+  width: 500px;
+  text-align: left;
+  padding: 20px;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 1px 1px 2px 0px rgb(164, 86, 86);
+  animation: modalpopup 0.3s ease-in-out;
+}
+
+@keyframes modalpopup {
+  0% {
+    opacity: 0%;
+  }
+
+  100% {
+    opacity: 100%;
+  }
+}
+
+.Modaltop {
+  display: flex;
+  justify-content: space-between;
+}
+
+.Modalcontent {
+  display: flex;
+  flex-direction: column;
+  font-size: large;
+  gap: 6px;
+}
+.Modalcontent > input {
+  padding-left: 6px;
+  outline-style: none;
+  block-size: 40px;
+  border: 3px solid white;
+  border-radius: 6px;
+  font-size: large;
+  color: black;
+  border: 2px solid #555;
+  font-weight: 500;
+}
+
+.Modalcontent > input:focus {
+  outline: 4px solid rgba(96, 178, 186, 0.769);
+}
+
+.Modalfooter {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  bottom: 5%;
+  right: 5%;
+}
+.Modalfooter > button {
+  display: flex;
+  font-size: large;
+  box-shadow: 2px 2px 0px 0px #555;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: #aa7e44;
+  border: none;
+  color: white;
+  text-align: center;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  opacity: 80%;
+  font-weight: 500;
+}
+.X {
+  background-color: transparent;
+  border: none;
+  font-size: 2em;
+  color: rgb(53, 53, 53);
+  cursor: pointer;
+}
+.Wordbreak {
+  word-break: break-all;
+  padding-right: 10px;
+}
+.Itemcard {
+  border: 1px solid white;
+  border-radius: 1rem;
+  padding: 20px;
+  color: white;
+  background-color: rgba(164, 117, 92, 0.255);
+  box-shadow: 2px 2px 0px 0px #555;
+  font-size: medium;
+  margin: 20px 0px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+}
+.Itemcardbutton {
+  display: inline-flex;
+}
+.Itemcardbutton > button {
+  font-size: large;
+  box-shadow: 2px 2px 0px 0px #555;
+  padding: 10px 12px;
+  border-radius: 5px;
+  cursor: pointer;
+  border: none;
+  color: white;
+  text-align: center;
+  transition-duration: 0.6s;
+  cursor: pointer;
+  opacity: 80%;
+  font-weight: 500;
+  margin-right: 9px;
+  background-color: rgba(192, 84, 102, 0.708);
+}
+.Itemcardbutton > button:hover {
+  background-color: transparent;
+  color: white;
+  border: 2px solid white;
+}
+
+.TodoLogoutUser {
+  color: black;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+}
+.Parallel > p {
+  color: black;
+  font-weight: 600;
+  margin: 6px;
+  padding: 0px 6px;
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  background-color: #23d5ab;
+  border-radius: 5px;
+}
+
+.TodoLogoutbutton {
+  background-color: aqua;
+  border: 2px solid black;
+  padding: 0px 4px;
+  margin: 6px;
+  cursor: pointer;
+  transition-duration: 0.5s;
+}
+
+.TodoLogoutbutton:hover {
+  border: 2px solid white;
+  color: white;
+  background-color: transparent;
+}
+.Logintodo {
+  color: blue;
+  font-size: 26px;
+}
+.Logintodo :hover {
+  color: white;
+}
+
+.Parallel {
+  display: inline-flex;
+  align-items: center;
+}
+@media (orientation: portrait), (max-width: 500px) {
+  .Itemcard {
+    display: grid;
+    flex-direction: column;
+    border: 1px solid white;
+    border-radius: 1rem;
+    padding: 20px;
+    color: white;
+    background-color: rgba(164, 117, 92, 0.255);
+    box-shadow: 2px 2px 0px 0px #555;
+    font-size: medium;
+    margin: 20px 0px;
+    place-items: left;
+  }
+
+  .Modal {
+    height: 400px;
+    width: 400px;
+  }
+}
