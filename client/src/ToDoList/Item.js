@@ -14,7 +14,7 @@ const Item = ({
   add,
   item,
   finish,
-  setFinish,
+  // setFinish,
 }) => {
   const [overStatus, setOverstatus] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
@@ -36,17 +36,17 @@ const Item = ({
   };
 
   //  試試看將原ｉｔｅｍ移到另一邊
-  function finishTask() {
-    submittingstatus.current = true;
-    const finishedMemo = listData.filter((item) => item.id === id);
-    deleteData(function (prev) {
-      return prev.filter((item) => item.id !== id);
-    });
-    setOverstatus(true);
-    setFinish(function (prev) {
-      return [...finishedMemo, ...prev];
-    });
-  }
+  // function finishTask() {
+  //   submittingstatus.current = true;
+  //   const finishedMemo = listData.filter((item) => item.id === id);
+  //   deleteData(function (prev) {
+  //     return prev.filter((item) => item.id !== id);
+  //   });
+  //   setOverstatus(true);
+  //   add(function (prev) {
+  //     return [...finishedMemo, ...prev];
+  //   });
+  // }
 
   return (
     <div>
@@ -64,17 +64,26 @@ const Item = ({
           >
             Delete
           </button>
-          <button
-            onClick={() => setIsOpen(true)}
-            type="button"
-            data-bs-toggle="modal"
-            data-bs-target={`#example-${id}`}
-          >
-            Edit
-          </button>
-          <button onClick={finishTask} type="button">
-            Finish!
-          </button>
+          {overStatus ? null : (
+            <button
+              onClick={() => setIsOpen(true)}
+              type="button"
+              data-bs-toggle="modal"
+              data-bs-target={`#example-${id}`}
+            >
+              Edit
+            </button>
+          )}
+          {/* {overStatus ? null : (
+            <button
+              onClick={() => {
+                finishTask();
+              }}
+              type="button"
+            >
+              Finish!
+            </button>
+          )} */}
         </div>
       </div>
       <Modal

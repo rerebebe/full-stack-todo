@@ -139,7 +139,7 @@ const Todo = () => {
             </button>
           </div>
         ) : (
-          <Link to="/register">
+          <Link to="/">
             <div className="Logintodo">
               <u>Login</u>
             </div>
@@ -153,7 +153,7 @@ const Todo = () => {
         deleteData={setData}
         submittingstatus={submittingstatus}
         finishedTask={finish}
-        setFinish={setFinish}
+        // setFinish={setFinish}
       />
     </div>
   );

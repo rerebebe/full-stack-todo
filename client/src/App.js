@@ -9,10 +9,13 @@ import { LoginContext } from "./Context/LoginContext";
 
 function App() {
   const [loginState, setLoginState] = useState("");
+  const [finish, setFinish] = useState("");
   return (
     <div>
       <Router>
-        <LoginContext.Provider value={{ loginState, setLoginState }}>
+        <LoginContext.Provider
+          value={{ loginState, setLoginState, finish, setFinish }}
+        >
           <Routes>
             <Route path="/" element={<Login />} />
             <Route path="/register" element={<Register />} />

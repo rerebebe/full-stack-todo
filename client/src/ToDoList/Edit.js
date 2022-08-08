@@ -1,11 +1,13 @@
-import { useState } from "react";
-import { v4 } from "uuid";
+import { useState, useContext } from "react";
+import { LoginContext } from "../Context/LoginContext";
 import Axios from "axios";
 
-const Edit = ({ add, loginState, setLoginState }) => {
+const Edit = ({ add }) => {
   const [note, setNote] = useState("");
   const [date, setDate] = useState("");
   const [time, setTime] = useState("");
+
+  const { loginState, setLoginState } = useContext(LoginContext);
 
   function emptyValue() {
     setNote("");
@@ -66,11 +68,24 @@ const Edit = ({ add, loginState, setLoginState }) => {
         name="memo"
         placeholder="put your stuff to do here..."
         required="required"
+        disabled={loginState ? false : true}
       />
       <label htmlFor="date">Date</label>
-      <input value={date} onChange={dateChange} type="date" name="date" />
+      <input
+        value={date}
+        onChange={dateChange}
+        type="date"
+        name="date"
+        disabled={loginState ? false : true}
+      />
       <label htmlFor="time">Time</label>
-      <input value={time} onChange={timeChange} type="time" name="time" />
+      <input
+        value={time}
+        onChange={timeChange}
+        type="time"
+        name="time"
+        disabled={loginState ? false : true}
+      />
       <div className="Buttondiv">
         <button
           disabled={note ? false : true}

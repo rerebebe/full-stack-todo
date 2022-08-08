@@ -15,7 +15,7 @@ app.use(express.json()); //automatically parsing every adjacent object that is s
 // make connection between front-end and back-end backend
 app.use(
   cors({
-    origin: ["http://localhost:3000"],
+    origin: [process.env.FRONT_END],
     method: ["GET", "POST"],
     credentials: true, //allow cookie to be enabled
   })

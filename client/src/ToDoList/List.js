@@ -7,7 +7,7 @@ const List = ({
   deleteData,
   submittingstatus,
   finishedTask,
-  setFinish,
+  // setFinish,
 }) => {
   return (
     <div>
@@ -31,7 +31,7 @@ const List = ({
                 listData={listData}
                 item={item}
                 finish={finishedTask}
-                setFinish={setFinish}
+                // setFinish={setFinish}
               />
             );
           })}
