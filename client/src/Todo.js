@@ -3,6 +3,7 @@ import { LoginContext } from "./Context/LoginContext";
 import "./index.css";
 import Edit from "./ToDoList/Edit.js";
 import List from "./ToDoList/List.js";
+
 import "./index.css";
 import Axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -56,8 +57,34 @@ const Todo = () => {
   const [data, setData] = useState([]);
   const submittingstatus = useRef(false); //送資料的狀態
   const [finish, setFinish] = useState([]);
-  const { loginState, setLoginState } = useContext(LoginContext);
+  const { loginState, setLoginState, setSameDate, sameDate } =
+    useContext(LoginContext);
   const navigate = useNavigate();
+  const showdate = new Date();
+  const displaytodaysdate =
+    showdate.getFullYear() +
+    "-" +
+    0 +
+    Number(showdate.getMonth() + 1) +
+    "-" +
+    0 +
+    showdate.getDate();
+
+  function hihi() {
+    data.map((item) => {
+      if (String(displaytodaysdate) === item.date && loginState) {
+        setSameDate(true);
+        console.log(item.date);
+      }
+    });
+  }
+  console.log(sameDate);
+  console.log(String(displaytodaysdate));
+
+  //const d = JSON.stringify(data);
+  // console.log(d);
+  // console.log(data.map((item) => item.date));
+
   // 從資料庫抓出資料, 只能出現一次;
   // useEffect(() => {
   //   Axios.get("http://localhost:3001/gettodo").then((response) => {
@@ -65,34 +92,6 @@ const Todo = () => {
   //     setData(response.data);
   //   });
   // }, []);
-
-  // useEffect(() => {
-  //   Axios.get("http://localhost:3001/gettodo").then((response) => {
-  //     console.log(response.data);
-  //     setData(response.data);
-  //   });
-  // }, [data]);
-
-  // useEffect(() => {
-  //   getData(setFinish);
-  // }, []);
-
-  // Until True;
-  // useEffect(() => {
-  //   if (!submittingstatus.current) {
-  //     //因為後面設定add/delete都是true, 所以原始值是false沒錯
-  //     return;
-  //   }
-  //   putData(data).then((data) => (submittingstatus.current = false));
-  // }, [data]);
-
-  // useEffect(() => {
-  //   if (!submittingstatus.current) {
-  //     //因為後面設定add/delete都是true, 所以原始值是false沒錯
-  //     return;
-  //   }
-  //   pushData(finish).then((finish) => (submittingstatus.current = false));
-  // }, [finish]);
 
   // 顯示user一直log in
   useEffect(() => {
@@ -125,6 +124,7 @@ const Todo = () => {
 
   return (
     <div>
+      {hihi()}
       <div className="TodoLogoutUser">
         {loginState ? (
           <div className="Parallel">
@@ -146,7 +146,13 @@ const Todo = () => {
           </Link>
         )}
       </div>
+
       <Edit add={setData} loginState={loginState} />
+      {sameDate ? (
+        <div className="AlertToday">
+          you have something to do today, please check down below!!
+        </div>
+      ) : null}
       <List
         add={setData}
         listData={data}

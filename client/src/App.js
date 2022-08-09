@@ -10,11 +10,20 @@ import { LoginContext } from "./Context/LoginContext";
 function App() {
   const [loginState, setLoginState] = useState("");
   const [finish, setFinish] = useState("");
+  const [sameDate, setSameDate] = useState(false);
+  // const sameDate = useRef(false);
   return (
     <div>
       <Router>
         <LoginContext.Provider
-          value={{ loginState, setLoginState, finish, setFinish }}
+          value={{
+            loginState,
+            setLoginState,
+            finish,
+            setFinish,
+            sameDate,
+            setSameDate,
+          }}
         >
           <Routes>
             <Route path="/" element={<Login />} />

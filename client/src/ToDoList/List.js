@@ -1,5 +1,6 @@
 import Item from "./Item.js";
-//
+import { useContext, useEffect } from "react";
+import { LoginContext } from "../Context/LoginContext.js";
 
 const List = ({
   add,
@@ -9,6 +10,7 @@ const List = ({
   finishedTask,
   // setFinish,
 }) => {
+  const { sameDate } = useContext(LoginContext);
   return (
     <div>
       <div>
@@ -18,6 +20,7 @@ const List = ({
           .reverse()
           .map((item) => {
             const { id, note, date, time } = item;
+
             return (
               <Item
                 key={id}

@@ -255,6 +255,35 @@
   align-items: center;
 }
 
+.ItemcardAlert {
+  border: 2px solid #ff9100;
+  border-radius: 1rem;
+  padding: 20px;
+  color: white;
+  background-color: transparent;
+  box-shadow: 2px 2px 0px 0px #555;
+  font-size: medium;
+  margin: 20px 0px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  animation: itemcardanime 1s infinite ease-out;
+}
+
+@keyframes itemcardanime {
+  0% {
+    box-shadow: 0px 0px 0px rgba(255, 101, 30, 0.249),
+      0px 0px 10px rgba(255, 101, 30, 0.285);
+    background-color: transparent;
+  }
+  100% {
+    box-shadow: 0px 0px 50px rgba(255, 101, 30, 0.644),
+      0px 0px 50px rgba(255, 101, 30, 0.52);
+    background-color: rgba(255, 115, 73, 0.2);
+  }
+}
+
 .Itemcardiffinished {
   opacity: 30%;
 }
@@ -329,6 +358,22 @@
   display: inline-flex;
   align-items: center;
 }
+.AlertToday {
+  border: none;
+  border-radius: 6px;
+  box-shadow: 2px 2px 1px 0px #555;
+  font-size: medium;
+  margin: 20px 0px;
+  display: flex;
+  gap: 20px;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px 0px;
+  background-color: rgba(202, 128, 195, 0.918);
+  padding: 20px 15px;
+  color: rgba(121, 22, 22, 0.888);
+}
+
 @media (orientation: portrait), (max-width: 500px) {
   .Itemcard {
     display: grid;
@@ -342,6 +387,23 @@
     font-size: medium;
     margin: 20px 0px;
     place-items: left;
+  }
+
+  .ItemcardAlert {
+    border: 2px solid #ff9100;
+    border-radius: 1rem;
+    padding: 20px;
+    color: white;
+    background-color: transparent;
+    box-shadow: 2px 2px 0px 0px #555;
+    font-size: medium;
+    margin: 20px 0px;
+    display: grid;
+    flex-direction: column;
+    gap: 20px;
+    justify-content: space-between;
+    align-items: center;
+    animation: itemcardanime 1s infinite ease-out;
   }
 
   .Modal {

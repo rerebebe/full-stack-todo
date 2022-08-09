@@ -49,7 +49,7 @@ const Login = () => {
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
       console.log(response);
-      if (response.data.loggined == true) {
+      if (response.data.loggined === true) {
         setLoginState(response.data.user[0].username);
       }
     });

@@ -1,4 +1,5 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
+import { LoginContext } from "../Context/LoginContext";
 import Axios from "axios";
 
 import Modal from "./Modal";
@@ -9,7 +10,7 @@ const Item = ({
   date,
   time,
   deleteData,
-  submittingstatus,
+
   listData,
   add,
   item,
@@ -18,13 +19,7 @@ const Item = ({
 }) => {
   const [overStatus, setOverstatus] = useState(false);
   const [isOpen, setIsOpen] = useState(false);
-
-  // function deleteItem() {
-  //   submittingstatus.current = true;
-  //   deleteData(function (prev) {
-  //     return prev.filter((item) => item.id !== id);
-  //   });
-  // }
+  const { sameDate, setSameDate, loginState } = useContext(LoginContext);
 
   const deleteItem = (id) => {
     Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
@@ -32,6 +27,7 @@ const Item = ({
       deleteData(function (prev) {
         return prev.filter((item) => item.id !== id);
       });
+      setSameDate(false);
     });
   };
 
@@ -48,9 +44,41 @@ const Item = ({
   //   });
   // }
 
+  // const showdate = new Date();
+  // const displaytodaysdate =
+  //   showdate.getFullYear() +
+  //   "-" +
+  //   0 +
+  //   Number(showdate.getMonth() + 1) +
+  //   "-" +
+  //   0 +
+  //   showdate.getDate();
+
+  // function hihi() {
+  //   if (displaytodaysdate === date && loginState) {
+  //     // alert("yoooooo");
+  //     setSameDate(true);
+  //     console.log(sameDate);
+  //   }
+  // }
+  // console.log(displaytodaysdate);
+  const showdate = new Date();
+  const displaytodaysdate =
+    showdate.getFullYear() +
+    "-" +
+    0 +
+    Number(showdate.getMonth() + 1) +
+    "-" +
+    0 +
+    showdate.getDate();
+
   return (
     <div>
-      <div className="Itemcard">
+      <div
+        className={
+          String(displaytodaysdate) === date ? "ItemcardAlert" : "Itemcard"
+        }
+      >
         <div className="Wordbreak">
           <p>{note}</p>
           <p></p>
@@ -65,12 +93,7 @@ const Item = ({
             Delete
           </button>
           {overStatus ? null : (
-            <button
-              onClick={() => setIsOpen(true)}
-              type="button"
-              data-bs-toggle="modal"
-              data-bs-target={`#example-${id}`}
-            >
+            <button onClick={() => setIsOpen(true)} type="button">
               Edit
             </button>
           )}
