@@ -10,7 +10,6 @@ const Item = ({
   date,
   time,
   deleteData,
-
   listData,
   add,
   item,
@@ -44,16 +43,6 @@ const Item = ({
   //   });
   // }
 
-  // const showdate = new Date();
-  // const displaytodaysdate =
-  //   showdate.getFullYear() +
-  //   "-" +
-  //   0 +
-  //   Number(showdate.getMonth() + 1) +
-  //   "-" +
-  //   0 +
-  //   showdate.getDate();
-
   // function hihi() {
   //   if (displaytodaysdate === date && loginState) {
   //     // alert("yoooooo");
@@ -61,29 +50,26 @@ const Item = ({
   //     console.log(sameDate);
   //   }
   // }
-  // console.log(displaytodaysdate);
+
   const showdate = new Date();
   const displaytodaysdate =
     showdate.getFullYear() +
     "-" +
-    0 +
-    Number(showdate.getMonth() + 1) +
+    ("0" + (showdate.getMonth() + 1)).slice(-2) +
     "-" +
-    0 +
-    showdate.getDate();
+    ("0" + showdate.getDate()).slice(-2);
 
   return (
     <div>
       <div
-        className={
-          String(displaytodaysdate) === date ? "ItemcardAlert" : "Itemcard"
-        }
+        className={displaytodaysdate === date ? "ItemcardAlert" : "Itemcard"}
       >
         <div className="Wordbreak">
           <p>{note}</p>
           <p></p>
           <p>{`${date} ${time}`}</p>
         </div>
+
         <div className="Itemcardbutton">
           <button
             onClick={() => {

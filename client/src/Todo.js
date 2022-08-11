@@ -3,7 +3,6 @@ import { LoginContext } from "./Context/LoginContext";
 import "./index.css";
 import Edit from "./ToDoList/Edit.js";
 import List from "./ToDoList/List.js";
-
 import "./index.css";
 import Axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
@@ -64,15 +63,13 @@ const Todo = () => {
   const displaytodaysdate =
     showdate.getFullYear() +
     "-" +
-    0 +
-    Number(showdate.getMonth() + 1) +
+    ("0" + (showdate.getMonth() + 1)).slice(-2) +
     "-" +
-    0 +
-    showdate.getDate();
+    ("0" + showdate.getDate()).slice(-2);
 
   function hihi() {
     data.map((item) => {
-      if (String(displaytodaysdate) === item.date && loginState) {
+      if (displaytodaysdate == item.date && loginState) {
         setSameDate(true);
         console.log(item.date);
       }
@@ -93,6 +90,21 @@ const Todo = () => {
   //   });
   // }, []);
 
+  // // Cookies
+  // function getCookie(name) {
+  //   const value = `; ${document.cookie}`;
+  //   const parts = value.split(`; ${name}=`);
+  //   if (parts.length === 2) return parts.pop().split(";").shift();
+  // }
+
+  // keep the same data from the same user
+  useEffect(() => {
+    Axios.get("http://localhost:3001/gettodo").then((response) => {
+      console.log(response);
+      setData(response.data);
+    });
+  }, []);
+
   // 顯示user一直log in
   useEffect(() => {
     Axios.get("http://localhost:3001/login").then((response) => {
@@ -102,16 +114,6 @@ const Todo = () => {
       }
     });
   }, []);
-
-  // keep the same data from the same user
-  useEffect(() => {
-    Axios.get("http://localhost:3001/gettodo", {
-      params: { username: loginState },
-    }).then((response) => {
-      // console.log(response.data);
-      setData(response.data);
-    });
-  }, [loginState]);
 
   // logout Button
   const logout = () => {

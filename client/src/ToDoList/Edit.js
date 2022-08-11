@@ -25,15 +25,6 @@ const Edit = ({ add }) => {
     setTime(e.target.value);
   }
 
-  // function addItem() {
-  //   add(function (prevData) {
-  //     submittingstatus.current = true;
-  //     return [{ id: v4(), note, date, time }, ...prevData];
-  //     // const item = { id: v4(), note: note, date: date, time: time };
-  //     // return [item, ...prevData];
-  //   });
-  //   emptyValue();
-  // }
   const showItems = () => {
     Axios.get("http://localhost:3001/gettodo", {
       params: { username: loginState },

@@ -16,20 +16,24 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-
     const response = await Axios.post("http://localhost:3001/login", {
       username: loginuserlRef.current.value,
       password: loginpasswordRef.current.value,
     });
     try {
-      setLoading(true);
-      // const response = await Axios.post("http://localhost:3001/login", {
-      //   username: loginuserlRef.current.value,
-      //   password: loginpasswordRef.current.value,
-      // });
-      console.log(response.data);
-      navigate("/todo");
-      setLoginState(response.data[0].username);
+      if (
+        loginuserlRef.current.value &&
+        loginpasswordRef.current.value !== null
+      ) {
+        setLoading(true);
+        // const response = await Axios.post("http://localhost:3001/login", {
+        //   username: loginuserlRef.current.value,
+        //   password: loginpasswordRef.current.value,
+        // });
+        console.log(response.data);
+        navigate("/todo");
+        setLoginState(response.data[0].username);
+      }
     } catch {
       setLoginState(response.data.message);
       navigate("/");
@@ -80,7 +84,7 @@ const Login = () => {
             required
           ></input>
 
-          <button onClick={login} disabled={loading} className="loginTabButton">
+          <button onClick={login} className="loginTabButton">
             Log In
           </button>
           <Link to="/register">

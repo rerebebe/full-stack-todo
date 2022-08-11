@@ -36,10 +36,17 @@ app.use(
   })
 );
 
+// const db = mysql.createConnection({
+//   user: "root",
+//   host: "localhost",
+//   password: "19900608",
+//   database: "LoginSystem",
+// });
+
 const db = mysql.createConnection({
-  user: "root",
-  host: "localhost",
-  password: "19900608",
+  user: "admin",
+  host: "aws-dbmysql.cdfxvmmwh998.ap-south-1.rds.amazonaws.com",
+  password: "regina7968",
   database: "LoginSystem",
 });
 
@@ -75,8 +82,8 @@ app.get("/login", (req, res) => {
 app.get("/logout", (req, res) => {
   if (req.session.user) {
     req.session.destroy();
-    res.clearCookie("connect.sid");
-    console.log();
+    res.clearCookie("username");
+    res.end();
   }
 });
 
@@ -129,14 +136,26 @@ app.post("/todo", (req, res) => {
   );
 });
 
+// app.get("/login", (req, res) => {
+//   if (req.session.user) {
+//     res.send({ loggined: true, user: req.session.user });
+//   } else {
+//     res.send({ loggined: false });
+//   }
+// });
+
 // User登入後得到database的資料
 app.get("/gettodo", (req, res) => {
-  let username = req.query.username ?? "";
+  // const username = req.body.username;
+  // let username = req.query.username ?? "";
+  const username = req.session.user[0].username;
   db.query(
     "SELECT * FROM todo WHERE username = ? ",
     username,
     (err, result) => {
+      res.cookie("username", username);
       res.send(result);
+      console.log(req.session.user);
     }
   );
 });
