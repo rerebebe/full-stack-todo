@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { LoginContext } from "../Context/LoginContext";
 import Axios from "axios";
+import { API_HOST } from "../constants";
 
 const Edit = ({ add }) => {
   const [note, setNote] = useState("");
@@ -26,7 +27,7 @@ const Edit = ({ add }) => {
   }
 
   const showItems = () => {
-    Axios.get("https://mysql-todo-server.herokuapp.com/gettodo", {
+    Axios.get(`${API_HOST}/gettodo`, {
       params: { username: loginState },
     }).then((response) => {
       // console.log(response.data);
@@ -35,7 +36,7 @@ const Edit = ({ add }) => {
   };
 
   const addItem = () => {
-    Axios.post("https://mysql-todo-server.herokuapp.com/todo", {
+    Axios.post(`${API_HOST}/todo`, {
       note: note,
       date: date,
       time: time,

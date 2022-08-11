@@ -1,6 +1,7 @@
 import { useState } from "react";
 import ReactDom from "react-dom";
 import Axios from "axios";
+import { API_HOST } from "../constants";
 
 const Modal = ({
   item,
@@ -33,7 +34,7 @@ const Modal = ({
   // }
 
   const updatedMemo = (id) => {
-    Axios.put("https://mysql-todo-server.herokuapp.com/update", {
+    Axios.put(`${API_HOST}/update`, {
       note: anote,
       date: adate,
       time: atime,

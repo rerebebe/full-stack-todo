@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import Axios from "axios";
+import { API_HOST } from "../constants";
 
 const Register = () => {
   const [usernameReg, setUsernameReg] = useState("");
@@ -22,7 +23,7 @@ const Register = () => {
     try {
       setError("");
       setLoading(true);
-      const response = await Axios.post("http://localhost:3001/register", {
+      const response = await Axios.post(`${API_HOST}/register`, {
         username: usernameReg,
         password: passwordReg,
       });

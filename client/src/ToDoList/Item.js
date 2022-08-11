@@ -1,7 +1,7 @@
 import { useState, useContext, useEffect } from "react";
 import { LoginContext } from "../Context/LoginContext";
 import Axios from "axios";
-
+import { API_HOST } from "../constants";
 import Modal from "./Modal";
 
 const Item = ({
@@ -21,15 +21,13 @@ const Item = ({
   const { sameDate, setSameDate, loginState } = useContext(LoginContext);
 
   const deleteItem = (id) => {
-    Axios.delete(`https://mysql-todo-server.herokuapp.com/${id}`).then(
-      (response) => {
-        // alert("delete!");
-        deleteData(function (prev) {
-          return prev.filter((item) => item.id !== id);
-        });
-        setSameDate(false);
-      }
-    );
+    Axios.delete(`${API_HOST}/delete/${id}`).then((response) => {
+      // alert("delete!");
+      deleteData(function (prev) {
+        return prev.filter((item) => item.id !== id);
+      });
+      setSameDate(false);
+    });
   };
 
   //  試試看將原ｉｔｅｍ移到另一邊

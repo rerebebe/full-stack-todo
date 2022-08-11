@@ -3,6 +3,7 @@ import { LoginContext } from "../Context/LoginContext";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import Axios from "axios";
+import { API_HOST } from "../constants";
 
 // frontend to express-session, use it below then it will work
 Axios.defaults.withCredentials = true;
@@ -16,13 +17,10 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    const response = await Axios.post(
-      "https://mysql-todo-server.herokuapp.com/login",
-      {
-        username: loginuserlRef.current.value,
-        password: loginpasswordRef.current.value,
-      }
-    );
+    const response = await Axios.post(`${API_HOST}/login`, {
+      username: loginuserlRef.current.value,
+      password: loginpasswordRef.current.value,
+    });
     try {
       if (
         loginuserlRef.current.value &&
@@ -54,14 +52,12 @@ const Login = () => {
 
   // 重新上來後也會紀錄user
   useEffect(() => {
-    Axios.get("https://mysql-todo-server.herokuapp.com/login").then(
-      (response) => {
-        console.log(response);
-        if (response.data.loggined === true) {
-          setLoginState(response.data.user[0].username);
-        }
+    Axios.get(`${API_HOST}/login`).then((response) => {
+      console.log(response);
+      if (response.data.loggined === true) {
+        setLoginState(response.data.user[0].username);
       }
-    );
+    });
   }, []);
 
   return (

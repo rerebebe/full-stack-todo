@@ -37,20 +37,20 @@ app.use(
 );
 
 // mysql://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
-const db = mysql.createConnection({
-  user: "b8083570a6111d",
-  host: "us-cdbr-east-06.cleardb.net",
-  password: "7aed03be",
-  database: "heroku_bda2f46c28afe7b",
-});
+// const db = mysql.createConnection({
+//   user: "b8083570a6111d",
+//   host: "us-cdbr-east-06.cleardb.net",
+//   password: "7aed03be",
+//   database: "heroku_bda2f46c28afe7b",
+// });
 
 // AWS database
-// const db = mysql.createConnection({
-//   user: "admin",
-//   host: "aws-dbmysql.cdfxvmmwh998.ap-south-1.rds.amazonaws.com",
-//   password: "regina7968",
-//   database: "LoginSystem",
-// });
+const db = mysql.createConnection({
+  user: "admin",
+  host: "aws-dbmysql.cdfxvmmwh998.ap-south-1.rds.amazonaws.com",
+  password: "regina7968",
+  database: "LoginSystem",
+});
 
 // 客戶創新的帳密
 app.post("/register", async (req, res) => {
@@ -192,4 +192,4 @@ app.put("/update", (req, res) => {
     }
   );
 });
-app.listen(process.env.PORT || PORT, () => console.log("running server")); //server接收的地方
+app.listen(3001, () => console.log("running server")); //server接收的地方
