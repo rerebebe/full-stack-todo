@@ -16,10 +16,13 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    const response = await Axios.post("http://localhost:3001/login", {
-      username: loginuserlRef.current.value,
-      password: loginpasswordRef.current.value,
-    });
+    const response = await Axios.post(
+      "https://mysql-todo-server.herokuapp.com/login",
+      {
+        username: loginuserlRef.current.value,
+        password: loginpasswordRef.current.value,
+      }
+    );
     try {
       if (
         loginuserlRef.current.value &&
@@ -51,12 +54,14 @@ const Login = () => {
 
   // 重新上來後也會紀錄user
   useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
-      console.log(response);
-      if (response.data.loggined === true) {
-        setLoginState(response.data.user[0].username);
+    Axios.get("https://mysql-todo-server.herokuapp.com/login").then(
+      (response) => {
+        console.log(response);
+        if (response.data.loggined === true) {
+          setLoginState(response.data.user[0].username);
+        }
       }
-    });
+    );
   }, []);
 
   return (

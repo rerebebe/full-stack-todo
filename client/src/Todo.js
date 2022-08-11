@@ -99,27 +99,33 @@ const Todo = () => {
 
   // keep the same data from the same user
   useEffect(() => {
-    Axios.get("http://localhost:3001/gettodo").then((response) => {
-      console.log(response);
-      setData(response.data);
-    });
+    Axios.get("https://mysql-todo-server.herokuapp.com/gettodo").then(
+      (response) => {
+        console.log(response);
+        setData(response.data);
+      }
+    );
   }, []);
 
   // 顯示user一直log in
   useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
-      console.log(response);
-      if (response.data.loggined == true) {
-        setLoginState(response.data.user[0].username);
+    Axios.get("https://mysql-todo-server.herokuapp.com/login").then(
+      (response) => {
+        console.log(response);
+        if (response.data.loggined == true) {
+          setLoginState(response.data.user[0].username);
+        }
       }
-    });
+    );
   }, []);
 
   // logout Button
   const logout = () => {
-    Axios.get("http://localhost:3001/logout").then((response) => {
-      console.log(response);
-    });
+    Axios.get("https://mysql-todo-server.herokuapp.com/logout").then(
+      (response) => {
+        console.log(response);
+      }
+    );
     navigate("/");
     setLoginState("");
   };

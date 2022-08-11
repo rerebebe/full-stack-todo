@@ -26,7 +26,7 @@ const Edit = ({ add }) => {
   }
 
   const showItems = () => {
-    Axios.get("http://localhost:3001/gettodo", {
+    Axios.get("https://mysql-todo-server.herokuapp.com/gettodo", {
       params: { username: loginState },
     }).then((response) => {
       // console.log(response.data);
@@ -35,7 +35,7 @@ const Edit = ({ add }) => {
   };
 
   const addItem = () => {
-    Axios.post("http://localhost:3001/todo", {
+    Axios.post("https://mysql-todo-server.herokuapp.com/todo", {
       note: note,
       date: date,
       time: time,

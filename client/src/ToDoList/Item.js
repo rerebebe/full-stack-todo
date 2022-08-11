@@ -21,13 +21,15 @@ const Item = ({
   const { sameDate, setSameDate, loginState } = useContext(LoginContext);
 
   const deleteItem = (id) => {
-    Axios.delete(`http://localhost:3001/delete/${id}`).then((response) => {
-      // alert("delete!");
-      deleteData(function (prev) {
-        return prev.filter((item) => item.id !== id);
-      });
-      setSameDate(false);
-    });
+    Axios.delete(`https://mysql-todo-server.herokuapp.com/${id}`).then(
+      (response) => {
+        // alert("delete!");
+        deleteData(function (prev) {
+          return prev.filter((item) => item.id !== id);
+        });
+        setSameDate(false);
+      }
+    );
   };
 
   //  試試看將原ｉｔｅｍ移到另一邊

@@ -33,7 +33,7 @@ const Modal = ({
   // }
 
   const updatedMemo = (id) => {
-    Axios.put("http://localhost:3001/update", {
+    Axios.put("https://mysql-todo-server.herokuapp.com/update", {
       note: anote,
       date: adate,
       time: atime,
