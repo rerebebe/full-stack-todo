@@ -1,8 +1,11 @@
-import { useState } from "react";
+import { useState, useContext, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import Axios from "axios";
+import Modal2 from "../ToDoList/Modal2";
 import { API_HOST } from "../constants";
+import { LoginContext } from "../Context/LoginContext";
+import Login from "./Login";
 
 const Register = () => {
   const [usernameReg, setUsernameReg] = useState("");
@@ -13,26 +16,30 @@ const Register = () => {
   const [confirmpasswordReg, setConfirmpasswordReg] = useState("");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
+  const { loginState, setLoginState } = useContext(LoginContext);
 
   const register = async (e) => {
     e.preventDefault();
     if (passwordReg !== confirmpasswordReg) {
       return setError("Passwords do not match");
     }
+    const response = await Axios.post(`${API_HOST}/register`, {
+      username: usernameReg,
+      password: passwordReg,
+    });
+
     try {
-      setError("");
       setLoading(true);
-      const response = await Axios.post(`${API_HOST}/register`, {
-        username: usernameReg,
-        password: passwordReg,
-      });
       console.log(response);
-      navigate("/");
+
+      // navigate("/todo");
     } catch (error) {
       console.log(error);
     }
     setLoading(false);
+    setIsOpen(true);
   };
 
   // const register = async (e) => {
@@ -99,7 +106,7 @@ const Register = () => {
           ></input>
           <button
             onClick={register}
-            disabled={loading}
+            disabled={usernameReg && passwordReg !== null ? false : true}
             className="loginTabButton"
           >
             Sign Up
@@ -111,6 +118,7 @@ const Register = () => {
           </Link>
         </form>
       </div>
+      <Modal2 isOpen={isOpen} setIsOpen={setIsOpen} />
     </div>
   );
 };

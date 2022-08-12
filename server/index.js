@@ -52,8 +52,8 @@ const db = mysql.createConnection({
   database: "LoginSystem",
 });
 
-// 客戶創新的帳密
-app.post("/register", async (req, res) => {
+// Create account
+app.post("/register", (req, res) => {
   const username = req.body.username;
   const password = req.body.password;
 
@@ -65,7 +65,10 @@ app.post("/register", async (req, res) => {
       "INSERT INTO users (username, password) VALUES (?,?)",
       [username, hash],
       (err, result) => {
-        console.log(err);
+        if (result) {
+          res.send(result);
+          res.send({ message: "Account Created!" });
+        }
       }
     );
   });

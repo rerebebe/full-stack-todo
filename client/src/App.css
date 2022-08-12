@@ -169,6 +169,24 @@
   animation: modalpopup 0.3s ease-in-out;
 }
 
+.Modal2 {
+  z-index: 2;
+  border: 2px solid rgba(248, 161, 99, 0.603);
+  background-color: rgba(248, 161, 99, 0.603);
+  border-radius: 1em;
+  height: 300px;
+  width: 500px;
+  text-align: left;
+  padding: 20px;
+  flex-direction: column;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  box-shadow: 1px 1px 2px 0px rgb(164, 86, 86);
+  animation: modalpopup 0.3s ease-in-out;
+}
+
 @keyframes modalpopup {
   0% {
     opacity: 0%;
@@ -204,6 +222,21 @@
 
 .Modalcontent > input:focus {
   outline: 4px solid rgba(96, 178, 186, 0.769);
+}
+
+.RegisteredContentTop {
+  padding: 5px 0px;
+  text-align: center;
+  font-size: xx-large;
+  color: white;
+  font-weight: 700;
+}
+.RegisteredContent {
+  padding: 5px 0px;
+  text-align: center;
+  font-size: x-large;
+  color: black;
+  font-weight: 700;
 }
 
 .Modalfooter {
