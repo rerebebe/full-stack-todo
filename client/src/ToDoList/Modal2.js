@@ -34,7 +34,12 @@ const Modal2 = ({ isOpen, setIsOpen }) => {
               </div>
 
               <div className="Modalfooter">
-                <button onClick={() => navigate("/")} type="button">
+                <button
+                  onClick={() => {
+                    navigate("/");
+                  }}
+                  type="button"
+                >
                   Login now
                 </button>
               </div>

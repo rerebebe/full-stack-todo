@@ -6,6 +6,7 @@ import List from "./ToDoList/List.js";
 import "./index.css";
 import Axios from "axios";
 import { useNavigate, Link } from "react-router-dom";
+import { API_HOST } from "./constants";
 
 // 將資料put到資料庫
 // const putData = async (data) => {
@@ -99,7 +100,7 @@ const Todo = () => {
 
   // keep the same data from the same user
   useEffect(() => {
-    Axios.get("http://localhost:3001/gettodo").then((response) => {
+    Axios.get(`${API_HOST}/gettodo`).then((response) => {
       console.log(response);
       setData(response.data);
     });
@@ -107,7 +108,7 @@ const Todo = () => {
 
   // 顯示user一直log in
   useEffect(() => {
-    Axios.get("http://localhost:3001/login").then((response) => {
+    Axios.get(`${API_HOST}/login`).then((response) => {
       console.log(response);
       if (response.data.loggined == true) {
         setLoginState(response.data.user[0].username);
@@ -117,7 +118,7 @@ const Todo = () => {
 
   // logout Button
   const logout = () => {
-    Axios.get("http://localhost:3001/logout").then((response) => {
+    Axios.get(`${API_HOST}/logout`).then((response) => {
       console.log(response);
     });
     navigate("/");

@@ -55,7 +55,7 @@ const Modal = ({
             <div>
               <div className="Modaltop">
                 <div>
-                  <h5 id="exampleModalLabel">Modal title</h5>
+                  <h5 id="exampleModalLabel"></h5>
                 </div>
                 <div>
                   <button

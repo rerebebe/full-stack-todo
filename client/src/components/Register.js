@@ -1,11 +1,10 @@
-import { useState, useContext, useEffect } from "react";
+import { useState, useContext } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import { Alert } from "react-bootstrap";
 import Axios from "axios";
 import Modal2 from "../ToDoList/Modal2";
 import { API_HOST } from "../constants";
 import { LoginContext } from "../Context/LoginContext";
-import Login from "./Login";
 
 const Register = () => {
   const [usernameReg, setUsernameReg] = useState("");
@@ -29,17 +28,12 @@ const Register = () => {
       username: usernameReg,
       password: passwordReg,
     });
-
     try {
-      setLoading(true);
       console.log(response);
-
-      // navigate("/todo");
+      setIsOpen(true);
     } catch (error) {
       console.log(error);
     }
-    setLoading(false);
-    setIsOpen(true);
   };
 
   // const register = async (e) => {

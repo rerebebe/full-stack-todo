@@ -3,6 +3,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
+// const PORT = 3031;
 require("dotenv").config();
 
 const bodyParser = require("body-parser");
@@ -38,8 +39,8 @@ app.use(
 
 // mysql://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
 // const db = mysql.createConnection({
-//   user: "b8083570a6111d",
 //   host: "us-cdbr-east-06.cleardb.net",
+//   user: "b8083570a6111d",
 //   password: "7aed03be",
 //   database: "heroku_bda2f46c28afe7b",
 // });
@@ -67,7 +68,6 @@ app.post("/register", (req, res) => {
       (err, result) => {
         if (result) {
           res.send(result);
-          res.send({ message: "Account Created!" });
         }
       }
     );
@@ -196,3 +196,7 @@ app.put("/update", (req, res) => {
   );
 });
 app.listen(3001, () => console.log("running server")); //server接收的地方
+
+// app.listen(process.env.PORT || PORT, () => {
+//   console.log(`Sever running on port ${PORT}`);
+// });
