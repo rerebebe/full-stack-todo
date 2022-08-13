@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-// const PORT = 3031;
+// const RedisStore = require("connect-redis")(session);
 require("dotenv").config();
 
 const bodyParser = require("body-parser");
@@ -12,8 +12,9 @@ const session = require("express-session"); //keep the users log in
 
 const app = express();
 
-app.use(express.json()); //automatically parsing every adjacent object that is sent from the fromt-end
-// make connection between front-end and back-end backend
+app.use(express.json()); //automatically parsing every adjacent object that is sent from front-end
+
+// make connection between front-end and back-end
 app.use(
   cors({
     origin: [process.env.FRONT_END],
@@ -25,33 +26,46 @@ app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // pass all the info for our session
+app.set("trust proxy", 1);
 app.use(
   session({
     key: "userId",
     secret: "this is a secret",
     resave: false,
     saveUninitialized: false,
+    // store: new RedisStore({
+    //   url: process.env.REDIS_URL,
+    // }),
     cookie: {
-      expires: 60 * 60 * 24,
+      sameSite: "none",
+      secure: false,
+      maxAge: 86400000,
     },
   })
 );
 
-// mysql://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
-// const db = mysql.createConnection({
-//   host: "us-cdbr-east-06.cleardb.net",
-//   user: "b8083570a6111d",
-//   password: "7aed03be",
-//   database: "heroku_bda2f46c28afe7b",
+// app.use(function (req, res, next) {
+//   if (!req.session) {
+//     return next(new Error("Oh no")); //handle error
+//   }
+//   next(); //otherwise continue
 // });
 
-// AWS database
+// mysql://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
 const db = mysql.createConnection({
-  user: "admin",
-  host: "aws-dbmysql.cdfxvmmwh998.ap-south-1.rds.amazonaws.com",
-  password: "regina7968",
-  database: "LoginSystem",
+  host: "us-cdbr-east-06.cleardb.net",
+  user: "b8083570a6111d",
+  password: "7aed03be",
+  database: "heroku_bda2f46c28afe7b",
 });
+
+// AWS database
+// const db = mysql.createConnection({
+//   user: "admin",
+//   host: "aws-dbmysql.cdfxvmmwh998.ap-south-1.rds.amazonaws.com",
+//   password: "regina7968",
+//   database: "LoginSystem",
+// });
 
 // Create account
 app.post("/register", (req, res) => {
@@ -121,7 +135,7 @@ app.post("/login", (req, res) => {
   );
 });
 
-// User輸入todo進去mysql database
+// //User輸入todo進去mysql database
 app.post("/todo", (req, res) => {
   const note = req.body.note;
   const date = req.body.date;
@@ -141,28 +155,27 @@ app.post("/todo", (req, res) => {
   );
 });
 
-// app.get("/login", (req, res) => {
-//   if (req.session.user) {
-//     res.send({ loggined: true, user: req.session.user });
-//   } else {
-//     res.send({ loggined: false });
-//   }
-// });
-
 // User登入後得到database的資料
 app.get("/gettodo", (req, res) => {
-  // const username = req.body.username;
   // let username = req.query.username ?? "";
-  const username = req.session.user[0].username;
-  db.query(
-    "SELECT * FROM todo WHERE username = ? ",
-    username,
-    (err, result) => {
-      res.cookie("username", username);
-      res.send(result);
-      console.log(req.session.user);
-    }
-  );
+  try {
+    const username = req.session.user[0].username;
+    db.query(
+      "SELECT * FROM todo WHERE username = ? ",
+      username,
+      (err, result) => {
+        if (err) {
+          res.send(err);
+        } else {
+          res.cookie("username", username);
+          res.send(result);
+          console.log(req.session.user);
+        }
+      }
+    );
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 //刪掉資料庫中的資料
@@ -195,8 +208,8 @@ app.put("/update", (req, res) => {
     }
   );
 });
-app.listen(3001, () => console.log("running server")); //server接收的地方
+// app.listen(3001, () => console.log("running server")); //server接收的地方
 
-// app.listen(process.env.PORT || PORT, () => {
-//   console.log(`Sever running on port ${PORT}`);
-// });
+app.listen(process.env.PORT || 3001, () => {
+  console.log("Sever running!!");
+});

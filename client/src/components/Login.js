@@ -51,14 +51,14 @@ const Login = () => {
   // };
 
   // 重新上來後也會紀錄user
-  useEffect(() => {
-    Axios.get(`${API_HOST}/login`).then((response) => {
-      console.log(response);
-      if (response.data.loggined === true) {
-        setLoginState(response.data.user[0].username);
-      }
-    });
-  }, []);
+  // useEffect(() => {
+  //   Axios.get(`${API_HOST}/login`).then((response) => {
+  //     console.log(response);
+  //     if (response.data.loggined === true) {
+  //       setLoginState(response.data.user[0].username);
+  //     }
+  //   });
+  // }, []);
 
   return (
     <div className="loginSignUpTab">

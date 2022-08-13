@@ -72,12 +72,12 @@ const Todo = () => {
     data.map((item) => {
       if (displaytodaysdate == item.date && loginState) {
         setSameDate(true);
-        console.log(item.date);
+        //console.log(item.date);
       }
     });
   }
-  console.log(sameDate);
-  console.log(String(displaytodaysdate));
+  //console.log(sameDate);
+  //console.log(String(displaytodaysdate));
 
   //const d = JSON.stringify(data);
   // console.log(d);
@@ -104,10 +104,6 @@ const Todo = () => {
       console.log(response);
       setData(response.data);
     });
-  }, []);
-
-  // 顯示user一直log in
-  useEffect(() => {
     Axios.get(`${API_HOST}/login`).then((response) => {
       console.log(response);
       if (response.data.loggined == true) {
@@ -115,6 +111,11 @@ const Todo = () => {
       }
     });
   }, []);
+
+  // 顯示user一直log in
+  // useEffect(() => {
+
+  // }, []);
 
   // logout Button
   const logout = () => {
