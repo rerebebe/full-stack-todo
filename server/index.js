@@ -160,7 +160,7 @@ app.post("/login", (req, res) => {
               const username = user.username;
               console.log("user data", user, username);
               res.cookie("username", username);
-              res.send(result);
+              res.send({ message: "User exist!!" });
             } else {
               res.send({ message: "Wrong username/password combo!!" });
             }
