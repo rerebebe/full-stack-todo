@@ -58,6 +58,7 @@ const db_config = {
   password: "7aed03be",
   database: "heroku_bda2f46c28afe7b",
 };
+// ip-10-0-127-72.ec2.internal:57232
 
 var db;
 
@@ -145,6 +146,7 @@ app.post("/login", (req, res) => {
         }
 
         console.log("result", result);
+        console.log("req body", req.body);
         if (result.length > 0) {
           bcrypt.compare(password, result[0].password, (error, response) => {
             if (response) {
