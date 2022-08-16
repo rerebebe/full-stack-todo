@@ -152,7 +152,10 @@ app.post("/login", (req, res) => {
             if (response) {
               req.session.user = result;
               console.log("login success, req.session.user", req.session.user);
+              console.log("login success, req.session.user", req.session.user);
               console.log("login success response", response);
+              console.log("does it go past this line?");
+
               const user = req.session.user[0];
               const username = user.username;
               console.log("user data", user, username);
