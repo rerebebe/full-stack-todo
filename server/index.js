@@ -121,8 +121,10 @@ app.post("/login", (req, res) => {
       username,
       (err, result) => {
         if (err) {
-          res.send({ err: err });
+          console.log("err from login", err);
         }
+
+        console.log("result", result);
         if (result.length > 0) {
           bcrypt.compare(password, result[0].password, (error, response) => {
             if (response) {
@@ -139,8 +141,7 @@ app.post("/login", (req, res) => {
       }
     );
   } catch (e) {
-    console.log(e);
-    res.send({ message: "User doesn't exist!!" });
+    console.log("login error", e);
   }
 });
 
