@@ -154,7 +154,7 @@ app.post("/login", (req, res) => {
               console.log("login success, req.session.user", req.session.user);
               console.log("login success, req.session.user", req.session.user);
               console.log("login success response", response);
-              console.log("does it go past this line?");
+              console.log("does it go past this line?", typeof result);
 
               const user = req.session.user[0];
               const username = user.username;
