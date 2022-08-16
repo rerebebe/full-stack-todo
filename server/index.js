@@ -155,7 +155,8 @@ app.post("/login", (req, res) => {
               console.log("login success response", response);
               const user = req.session.user[0];
               const username = user.username;
-              res.cookie("username", username, user);
+              console.log("user data", user, username);
+              res.cookie("username", username);
               res.send(result);
             } else {
               res.send({ message: "Wrong username/password combo!!" });
