@@ -151,7 +151,8 @@ app.post("/login", (req, res) => {
           bcrypt.compare(password, result[0].password, (error, response) => {
             if (response) {
               req.session.user = result;
-              console.log(req.session.user);
+              console.log("login success, req.session.user", req.session.user);
+              console.log("login success response", response);
               res.send(result);
             } else {
               res.send({ message: "Wrong username/password combo!!" });
