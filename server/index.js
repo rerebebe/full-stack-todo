@@ -3,7 +3,7 @@ const mysql = require("mysql2");
 const cors = require("cors");
 const bcrypt = require("bcrypt");
 const saltRounds = 10;
-// const RedisStore = require("connect-redis")(session);
+
 require("dotenv").config();
 
 const bodyParser = require("body-parser");
