@@ -52,16 +52,37 @@ app.use(
 // });
 
 // mysql://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
-const db = mysql.createConnection({
+const db_config = {
   host: "us-cdbr-east-06.cleardb.net",
   user: "b8083570a6111d",
   password: "7aed03be",
   database: "heroku_bda2f46c28afe7b",
-});
+};
 
-db.on("error", function (err) {
-  console.log("db error", err);
-});
+var connection;
+
+function handleDisconnect() {
+  connection = mysql.createConnection(db_config); // Recreate the connection, since
+
+  connection.connect(function (err) {
+    if (err) {
+      console.log("error when connecting to db:", err);
+      setTimeout(handleDisconnect, 2000);
+    }
+  });
+
+  connection.on("error", function (err) {
+    console.log("db error", err);
+    if (err.code === "PROTOCOL_CONNECTION_LOST") {
+      // Connection to the MySQL server is usually
+      handleDisconnect();
+    } else {
+      throw err;
+    }
+  });
+}
+
+handleDisconnect();
 
 // AWS database
 // const db = mysql.createConnection({
