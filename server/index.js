@@ -59,19 +59,18 @@ const db_config = {
   database: "heroku_bda2f46c28afe7b",
 };
 
-var connection;
+var db;
 
 function handleDisconnect() {
-  connection = mysql.createConnection(db_config); // Recreate the connection, since
-
-  connection.connect(function (err) {
+  db = mysql.createConnection(db_config); // Recreate the connection, since
+  db.connect(function (err) {
     if (err) {
       console.log("error when connecting to db:", err);
       setTimeout(handleDisconnect, 2000);
     }
   });
 
-  connection.on("error", function (err) {
+  db.on("error", function (err) {
     console.log("db error", err);
     if (err.code === "PROTOCOL_CONNECTION_LOST") {
       // Connection to the MySQL server is usually
