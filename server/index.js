@@ -108,31 +108,36 @@ app.get("/logout", (req, res) => {
 
 // 客戶登入
 app.post("/login", (req, res) => {
-  const username = req.body.username;
-  const password = req.body.password;
+  try {
+    const username = req.body.username;
+    const password = req.body.password;
 
-  db.query(
-    "SELECT * FROM users WHERE username = ?",
-    username,
-    (err, result) => {
-      if (err) {
-        res.send({ err: err });
+    db.query(
+      "SELECT * FROM users WHERE username = ?",
+      username,
+      (err, result) => {
+        if (err) {
+          res.send({ err: err });
+        }
+        if (result.length > 0) {
+          bcrypt.compare(password, result[0].password, (error, response) => {
+            if (response) {
+              req.session.user = result;
+              console.log(req.session.user);
+              res.send(result);
+            } else {
+              res.send({ message: "Wrong username/password combo!!" });
+            }
+          });
+        } else {
+          res.send({ message: "User doesn't exist!!" });
+        }
       }
-      if (result.length > 0) {
-        bcrypt.compare(password, result[0].password, (error, response) => {
-          if (response) {
-            req.session.user = result;
-            console.log(req.session.user);
-            res.send(result);
-          } else {
-            res.send({ message: "Wrong username/password combo!!" });
-          }
-        });
-      } else {
-        res.send({ message: "User doesn't exist!!" });
-      }
-    }
-  );
+    );
+  } catch (e) {
+    console.log(e);
+    res.send({ message: "User doesn't exist!!" });
+  }
 });
 
 // //User輸入todo進去mysql database
