@@ -17,10 +17,14 @@ const Login = () => {
 
   const login = async (e) => {
     e.preventDefault();
-    const response = await Axios.post(`${API_HOST}/login`, {
-      username: loginuserlRef.current.value,
-      password: loginpasswordRef.current.value,
-    });
+    const response = await Axios.post(
+      `${API_HOST}/login`,
+      {
+        username: loginuserlRef.current.value,
+        password: loginpasswordRef.current.value,
+      },
+      { withCredentials: true }
+    );
     try {
       if (
         loginuserlRef.current.value &&
