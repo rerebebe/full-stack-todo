@@ -174,6 +174,7 @@ app.post("/todo", (req, res) => {
   const date = req.body.date;
   const time = req.body.time;
   const username = req.body.username;
+  console.log("req.body", req.body);
 
   db.query(
     "INSERT INTO todo (username,note,date,time) VALUES (?,?,?,?)",
@@ -192,6 +193,7 @@ app.post("/todo", (req, res) => {
 app.get("/gettodo", (req, res) => {
   // let username = req.query.username ?? "";
   try {
+    console.log("req.body", req.body);
     console.log("req.session", req.session);
     console.log("req.session.user", req.session.user);
     const username = req.session.user[0].username;
