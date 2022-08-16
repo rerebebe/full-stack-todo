@@ -59,6 +59,10 @@ const db = mysql.createConnection({
   database: "heroku_bda2f46c28afe7b",
 });
 
+db.on("error", function (err) {
+  console.log("db error", err);
+});
+
 // AWS database
 // const db = mysql.createConnection({
 //   user: "admin",
