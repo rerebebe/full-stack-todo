@@ -164,6 +164,8 @@ app.post("/todo", (req, res) => {
 app.get("/gettodo", (req, res) => {
   // let username = req.query.username ?? "";
   try {
+    console.log("req.session", req.session);
+    console.log("req.session.user", req.session.user);
     const username = req.session.user[0].username;
     db.query(
       "SELECT * FROM todo WHERE username = ? ",
