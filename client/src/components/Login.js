@@ -19,6 +19,7 @@ const Login = () => {
     e.preventDefault();
     const response = await Axios.post(
       `${API_HOST}/login`,
+
       {
         username: loginuserlRef.current.value,
         password: loginpasswordRef.current.value,
@@ -26,21 +27,25 @@ const Login = () => {
       { withCredentials: true }
     );
     try {
-      if (
-        loginuserlRef.current.value &&
-        loginpasswordRef.current.value !== null
-      ) {
-        setLoading(true);
-        // const response = await Axios.post("http://localhost:3001/login", {
-        //   username: loginuserlRef.current.value,
-        //   password: loginpasswordRef.current.value,
-        // });
-        console.log(response.data);
-        navigate("/todo");
-        setLoginState(response.data[0].username);
-      }
+      // if (
+      //   loginuserlRef.current.value &&
+      //   loginpasswordRef.current.value !== null
+      // ) {
+      //   setLoading(true);
+      //   navigate("/");
+      // }
+      // const response = await Axios.post("http://localhost:3001/login", {
+      //   username: loginuserlRef.current.value,
+      //   password: loginpasswordRef.current.value,
+      // });
+      console.log(response.data);
+      navigate("/todo");
+      setLoginState(response.data[0].username);
+      sessionStorage.setItem("name", response.data[0].username);
     } catch {
-      setLoginState(response.data.message);
+      setLoginState("not logged in....");
+      console.log(response.data.message);
+      console.log(response.data);
       navigate("/");
     }
 

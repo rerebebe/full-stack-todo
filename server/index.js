@@ -22,11 +22,12 @@ app.use(
     credentials: true, //allow cookie to be enabled
   })
 );
+
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 // pass all the info for our session
-app.set("trust proxy", 1);
+// app.set("trust proxy", 1);
 app.use(
   session({
     key: "userId",
@@ -44,14 +45,23 @@ app.use(
   })
 );
 
-// app.use(function (req, res, next) {
-//   if (!req.session) {
-//     return next(new Error("Oh no")); //handle error
-//   }
-//   next(); //otherwise continue
-// });
+// app.use(
+//   session({
+//     name: "enter_the_session_name",
+//     resave: false,
+//     saveUninitialized: false,
+//     store: sessionStore,
+//     secret: "This is a secret",
+//     cookie: {
+//       httpOnly: true,
+//       maxAge: 1000 * 60 * 60 * 2,
+//       sameSite: true,
+//       secure: 'production',
+//     },
+//   })
+// );
 
-// mysql://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
+// heroku://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
 const db_config = {
   host: "us-cdbr-east-06.cleardb.net",
   user: "b8083570a6111d",
@@ -123,13 +133,13 @@ app.get("/login", (req, res) => {
 });
 
 // logout?
-app.get("/logout", (req, res) => {
-  if (req.session.user) {
-    req.session.destroy();
-    res.clearCookie("username");
-    res.end();
-  }
-});
+// app.get("/logout", (req, res) => {
+//   if (req.session.user) {
+//     req.session.destroy();
+//     res.clearCookie("username");
+//     res.end();
+//   }
+// });
 
 // 客戶登入
 app.post("/login", (req, res) => {
@@ -145,8 +155,6 @@ app.post("/login", (req, res) => {
           console.log("err from login", err);
         }
 
-        console.log("result", result);
-        console.log("req body", req.body);
         if (result.length > 0) {
           bcrypt.compare(password, result[0].password, (error, response) => {
             if (response) {
@@ -160,7 +168,9 @@ app.post("/login", (req, res) => {
               const username = user.username;
               console.log("user data", user, username);
               res.cookie("username", username);
-              res.send({ message: "User exist!!" });
+              console.log("result", result);
+              console.log("req body", req.body);
+              res.send(result);
             } else {
               res.send({ message: "Wrong username/password combo!!" });
             }
@@ -203,9 +213,12 @@ app.get("/gettodo", (req, res) => {
     console.log("gettodo req.body", req.body);
     console.log("req.session", req.session);
     console.log("req.session.user", req.session.user);
-    const username = req.session.user[0].username;
+    //const username = req.body.username;
+    //const username = req.session.user[0].username;
+    const username = req.query.username ?? "";
+
     db.query(
-      "SELECT * FROM todo WHERE username = ? ",
+      "SELECT * FROM todo WHERE username = ?",
       username,
       (err, result) => {
         if (err) {

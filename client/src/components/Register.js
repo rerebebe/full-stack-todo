@@ -33,6 +33,7 @@ const Register = () => {
       setIsOpen(true);
     } catch (error) {
       console.log(error);
+      alert("wrong!!!");
     }
   };
 

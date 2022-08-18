@@ -1,6 +1,11 @@
 {
   "name": "client",
   "version": "0.1.0",
+  "engines": {
+    "node": "18.7.0",
+    "npm": "8.15.0",
+    "yarn": "1.22.17"
+  },
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^5.16.4",

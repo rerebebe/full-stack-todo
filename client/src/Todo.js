@@ -100,29 +100,32 @@ const Todo = () => {
 
   // keep the same data from the same user
   useEffect(() => {
-    Axios.get(`${API_HOST}/gettodo`).then((response) => {
+    Axios.get(`${API_HOST}/gettodo`, {
+      params: { username: sessionStorage.getItem("name") },
+    }).then((response) => {
       console.log(response);
       setData(response.data);
+      console.log(sessionStorage.getItem("name"));
     });
     Axios.get(`${API_HOST}/login`).then((response) => {
+      const user = sessionStorage.getItem("name");
       console.log(response);
-      if (response.data.loggined == true) {
-        setLoginState(response.data.user[0].username);
-      }
+      setLoginState(user);
     });
   }, []);
 
-  // 顯示user一直log in
+  // user一直顯示log in
   // useEffect(() => {
 
   // }, []);
 
   // logout Button
   const logout = () => {
-    Axios.get(`${API_HOST}/logout`).then((response) => {
-      console.log(response);
-    });
+    // Axios.get(`${API_HOST}/logout`).then((response) => {
+    //   console.log(response);
+    // });
     navigate("/");
+    sessionStorage.clear();
     setLoginState("");
   };
 
