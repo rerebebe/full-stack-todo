@@ -64,7 +64,7 @@ const Modal = ({
                     aria-label="Close"
                     className="X"
                   >
-                    {/* <CloseButton /> */}x
+                    &times;
                   </button>
                 </div>
               </div>

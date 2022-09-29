@@ -22,7 +22,7 @@ const Modal2 = ({ isOpen, setIsOpen }) => {
                     aria-label="Close"
                     className="X"
                   >
-                    x
+                    &times;
                   </button>
                 </div>
               </div>

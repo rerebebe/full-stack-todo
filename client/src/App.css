@@ -127,12 +127,11 @@
   box-shadow: 2px 2px 0px 0px #555;
   padding: 13px 30px;
   border-radius: 5px;
-  cursor: pointer;
   background-color: #9c4c83be;
   border: none;
   color: white;
   text-align: center;
-  transition-duration: 0.6s;
+  transition-duration: 0.5s;
   cursor: pointer;
   font-weight: 600;
 }
