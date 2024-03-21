@@ -61,13 +61,20 @@ app.use(
 //   })
 // );
 
-// heroku://b8083570a6111d:7aed03be@us-cdbr-east-06.cleardb.net/heroku_bda2f46c28afe7b?reconnect=true
+// mysql://ccztrnooxhohx5z1:oqf39wxilm4ieu8b@alv4v3hlsipxnujn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/tniq0tx0aqq2wq12
 const db_config = {
-  host: "us-cdbr-east-06.cleardb.net",
-  user: "b8083570a6111d",
-  password: "7aed03be",
-  database: "heroku_bda2f46c28afe7b",
+  host: "alv4v3hlsipxnujn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+  user: "ccztrnooxhohx5z1",
+  password: "oqf39wxilm4ieu8b",
+  database: "tniq0tx0aqq2wq12",
 };
+
+// const db_config = {
+//   host: "sql6.freesqldatabase.com",
+//   user: "sql6691480",
+//   password: "XDWw68GLMB",
+//   database: "sql6691480",
+// };
 // ip-10-0-127-72.ec2.internal:57232
 
 var db;
@@ -185,7 +192,7 @@ app.post("/login", (req, res) => {
   }
 });
 
-// //User輸入todo進去mysql database
+// User輸入todo進去mysql database
 app.post("/todo", (req, res) => {
   const note = req.body.note;
   const date = req.body.date;

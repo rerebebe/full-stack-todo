@@ -1,12 +1,23 @@
 const mysql = require("mysql2");
+
+// mysql://ccztrnooxhohx5z1:oqf39wxilm4ieu8b@alv4v3hlsipxnujn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com:3306/tniq0tx0aqq2wq12
 const pool = mysql.createPool({
   connectionLimit: 10,
-  password: "7aed03be",
-  user: "b8083570a6111d",
-  database: "heroku_bda2f46c28afe7b",
-  host: "us-cdbr-east-06.cleardb.net",
+  password: "oqf39wxilm4ieu8b",
+  user: "ccztrnooxhohx5z1",
+  database: "tniq0tx0aqq2wq12",
+  host: "alv4v3hlsipxnujn.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
   port: "3306",
 });
+
+// const pool = mysql.createPool({
+//   connectionLimit: 10,
+//   password: "XDWw68GLMB",
+//   user: "sql6691480",
+//   database: "sql6691480",
+//   host: "sql6.freesqldatabase.com",
+//   port: "3306",
+// });
 
 let db = {};
 
@@ -50,3 +61,5 @@ db.getUser = (id) => {
 //   });
 // };
 module.exports = db;
+
+insertIntoDB();
