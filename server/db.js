@@ -61,5 +61,3 @@ db.getUser = (id) => {
 //   });
 // };
 module.exports = db;
-
-insertIntoDB();

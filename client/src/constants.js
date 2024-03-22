@@ -4,4 +4,4 @@
 // export const API_HOST = "https://mysql-todo-server.herokuapp.com";
 
 export const API_HOST =
-  "https://rere-full-stack-todo-35d259227595.herokuapp.com/";
+  "https://rere-full-stack-todo-35d259227595.herokuapp.com";
