@@ -15,6 +15,7 @@ const app = express();
 app.use(express.json()); //automatically parsing every adjacent object that is sent from front-end
 
 // make connection between front-end and back-end
+
 app.use(
   cors({
     origin: [process.env.FRONT_END],
