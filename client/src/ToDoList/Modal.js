@@ -34,13 +34,14 @@ const Modal = ({
   // }
 
   const updatedMemo = (id) => {
+    console.log("ID: ", id, anote, adate, atime);
     Axios.put(`${API_HOST}/update`, {
       note: anote,
       date: adate,
       time: atime,
       id: id,
     }).then((response) => {
-      // alert("update");
+      console.log("is there update reponse?:", response);
       const updatedMemo = { id, note: anote, date: adate, time: atime };
       add(listData.map((item) => (item.id === id ? updatedMemo : item)));
     });

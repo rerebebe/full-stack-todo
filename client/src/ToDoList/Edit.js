@@ -58,7 +58,7 @@ const Edit = ({ add }) => {
         value={note}
         onChange={noteChange}
         name="memo"
-        placeholder="put your stuff to do here..."
+        placeholder="what do you need to do?"
         required="required"
         disabled={loginState ? false : true}
       />

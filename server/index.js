@@ -15,14 +15,39 @@ const app = express();
 app.use(express.json()); //automatically parsing every adjacent object that is sent from front-end
 
 // make connection between front-end and back-end
-
 app.use(
   cors({
     origin: [process.env.FRONT_END],
-    method: ["GET", "POST"],
-    credentials: true, //allow cookie to be enabled
+    methods: ["GET", "POST", "OPTIONS", "DELETE", "PUT"],
+    allowedHeaders: [
+      "Access-Control-Allow-Headers",
+      "Origin",
+      "X-Requested-With",
+      "Content-Type",
+      "Accept",
+      "Authorization",
+      "token",
+      "Access-Control-Request-Method",
+      "Access-Control-Request-Headers",
+      "Access-Control-Allow-Credentials",
+    ],
+    credentials: true, // allow cookie to be enabled
   })
 );
+
+// // new cors config
+// app.use((req, res, next) => {
+//   res.header("Access-Control-Allow-Origin", "*");
+//   res.header(
+//     "Access-Control-Allow-Headers",
+//     "Origin, X-Requested, Content-Type, Accept Authorization"
+//   );
+//   if (req.method === "OPTIONS") {
+//     res.header("Access-Control-Allow-Methods", "POST, PUT, PATCH, GET, DELETE");
+//     return res.status(200).json({});
+//   }
+//   next();
+// });
 
 app.use(cookieParser());
 app.use(bodyParser.urlencoded({ extended: true }));
@@ -117,7 +142,7 @@ app.post("/register", (req, res) => {
 
   bcrypt.hash(password, saltRounds, (err, hash) => {
     if (err) {
-      console.log(err);
+      console.log("A error", err);
     }
     db.query(
       "INSERT INTO users (username, password) VALUES (?,?)",
@@ -125,6 +150,9 @@ app.post("/register", (req, res) => {
       (err, result) => {
         if (result) {
           res.send(result);
+        }
+        if (err) {
+          console.log("C error: ", err);
         }
       }
     );
@@ -162,8 +190,8 @@ app.post("/login", (req, res) => {
         if (err) {
           console.log("err from login", err);
         }
-
         if (result.length > 0) {
+          console.log("比較password", password, result[0].password);
           bcrypt.compare(password, result[0].password, (error, response) => {
             if (response) {
               req.session.user = result;
@@ -180,7 +208,8 @@ app.post("/login", (req, res) => {
               console.log("req body", req.body);
               res.send(result);
             } else {
-              res.send({ message: "Wrong username/password combo!!" });
+              res.send({ message: error });
+              console.log("login error?:", error, response); // here!!!, and the error is undefined???
             }
           });
         } else {
@@ -189,7 +218,8 @@ app.post("/login", (req, res) => {
       }
     );
   } catch (e) {
-    console.log("login error", e);
+    console.log("login super error...: ", e);
+    res.send({ error: e });
   }
 });
 
@@ -207,8 +237,10 @@ app.post("/todo", (req, res) => {
     (err, result) => {
       if (err) {
         res.send(err);
+        console.log("fail", err);
       } else {
         res.send("value inserted!");
+        console.log("succeed in adding memo: ", result);
       }
     }
   );
@@ -257,7 +289,7 @@ app.delete("/delete/:id", (req, res) => {
 
 // Update資料庫中的資料
 app.put("/update", (req, res) => {
-  console.log(" update req.body", req.body);
+  // console.log("update req.body", req.body);
   const id = req.body.id;
   const note = req.body.note;
   const date = req.body.date;
@@ -268,8 +300,10 @@ app.put("/update", (req, res) => {
     (err, result) => {
       if (err) {
         res.send(err);
+        console.log("UPDATE error", err);
       } else {
         res.send(result);
+        console.log("UPDATE success!", result);
       }
     }
   );

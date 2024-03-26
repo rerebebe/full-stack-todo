@@ -16,3 +16,6 @@ so I modified it into :
 3. And also end the session on the front end (Todo.js line128)
 
 ps. This method is not safe plz check storing value in the cookie, or get the sessionID not session value
+
+issue memo-
+one issue: the password can't match by `bcrypt`, turns out to be data type in MySQL's problem, the hash data was getting chopped by the column size in my db. It's correctly working now

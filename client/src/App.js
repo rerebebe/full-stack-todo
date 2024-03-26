@@ -11,6 +11,7 @@ function App() {
   const [loginState, setLoginState] = useState("");
   const [finish, setFinish] = useState("");
   const [sameDate, setSameDate] = useState(false);
+  const [isOpen, setIsOpen] = useState(false);
   // const sameDate = useRef(false);
   return (
     <div>
@@ -23,6 +24,8 @@ function App() {
             setFinish,
             sameDate,
             setSameDate,
+            isOpen,
+            setIsOpen,
           }}
         >
           <Routes>

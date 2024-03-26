@@ -22,11 +22,10 @@ const Item = ({
 
   const deleteItem = (id) => {
     Axios.delete(`${API_HOST}/delete/${id}`).then((response) => {
-      // alert("delete!");
       deleteData(function (prev) {
         return prev.filter((item) => item.id !== id);
       });
-      setSameDate(false);
+      // setSameDate(false);
     });
   };
 

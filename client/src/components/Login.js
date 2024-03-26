@@ -19,7 +19,6 @@ const Login = () => {
     e.preventDefault();
     const response = await Axios.post(
       `${API_HOST}/login`,
-
       {
         username: loginuserlRef.current.value,
         password: loginpasswordRef.current.value,
@@ -42,10 +41,16 @@ const Login = () => {
       navigate("/todo");
       setLoginState(response.data[0].username);
       sessionStorage.setItem("name", response.data[0].username);
-    } catch {
-      setLoginState("not logged in....");
-      console.log(response.data.message);
-      console.log(response.data);
+    } catch (err) {
+      console.log(
+        "USER",
+        loginuserlRef.current.value,
+        loginpasswordRef.current.value
+      );
+      setLoginState(response.data.message);
+      console.log("MESSAGE", response.data.message);
+      console.log("MESSAGE2", response.data);
+      console.log("why cant i log in: ", err);
       navigate("/");
     }
 
